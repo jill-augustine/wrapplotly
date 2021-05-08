@@ -8,12 +8,8 @@ import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import plotly.io as pio
-from sklearn.linear_model import LinearRegression
-from scipy.stats import pearsonr
-import datetime as dt
-from ipywidgets import widgets
 
-print(__name__) if __name__ != '__main__' else None
+#print(__name__) if __name__ != '__main__' else None
 
 rangeselector = dict(
         rangeselector=dict(
@@ -69,8 +65,8 @@ def save_plot(plot, file, mode = 'static', **kwargs):
             kwargs['scale'] = 1.5            
         
         if file.split('.')[-1] == 'html':
-            error_msg = ('mode was set to static but file extenstion was set to .html. \n'
-                         'see plotly.graph_pbjects.Figure.write_image() for more information'
+            error_msg = ('''mode was set to static but file extenstion was set to .html.
+                            see plotly.graph_pbjects.Figure.write_image() for more information''')
             raise ValueError(error_msg)
         else:
             plot.write_image(file = file, **kwargs)

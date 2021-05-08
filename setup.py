@@ -5,13 +5,13 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="wrapplotly",
-    version="0.0.1",
+    version="0.0.2",
     author="Jillian Augustine",
     author_email="jaugur.ds@gmail.com",
     description="A plotly wrapper allowing subplots and single plots",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/pypa/sampleproject",
+    url="https://github.com/jill-augustine/wrapplotly",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
