@@ -8,6 +8,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import plotly.io as pio
+from wrapplotly.util import as_list
 
 #print(__name__) if __name__ != '__main__' else None
 
@@ -66,7 +67,7 @@ def save_plot(plot, file, mode = 'static', **kwargs):
         
         if file.split('.')[-1] == 'html':
             error_msg = ('''mode was set to static but file extenstion was set to .html.
-                            see plotly.graph_pbjects.Figure.write_image() for more information''')
+                            see plotly.graph_objects.Figure.write_image() for more information''')
             raise ValueError(error_msg)
         else:
             plot.write_image(file = file, **kwargs)
@@ -78,7 +79,6 @@ def save_plot(plot, file, mode = 'static', **kwargs):
         return None
     else:
         raise ValueError('Mode must be either "static" or "interactive".')
-
 
 def multiplot(layers = None, nrows = None, ncols = None, fig = None, 
               colorway = px.colors.colorbrewer.Set2,
@@ -97,8 +97,8 @@ def multiplot(layers = None, nrows = None, ncols = None, fig = None,
     ----
     In the case of axis kwargs, all subplots have two y-axes. 
     kwargs for multiplots are therefore for example: 
-        xaxis3_title_text (for the 3rd xaxis)
-        yaxis4_title_font for the fourth y axis in figure (2nd yaxis of 2nd subplot)
+        xaxis3_title_text for the 3rd xaxis
+        yaxis4_title_font for the 2nd yaxis of 2nd subplot (the fourth y axis in figure)
     '''
 
     # fig should probably be none
@@ -132,7 +132,6 @@ def multiplot(layers = None, nrows = None, ncols = None, fig = None,
     fig = fig.update_layout(**kwargs, colorway = colorway)
 
     return fig
-
 
 def multiplot_for_insights(layers = None, nrows = None, ncols = None, fig = None, 
               colorway = px.colors.colorbrewer.Set2, subplot_titles = None, external_specs = None,
@@ -220,7 +219,7 @@ def autoplot(layers= None, data=None, x = None, y = None, fig = None, row = None
     col: int (must also be specified if fig is specified)
     kwargs: keyword arguments passed onto fig.update_layout()
     '''
-    if fig is None: # This is necessary because even if autplot only creates one plot, 
+    if fig is None: # This is necessary because even if autoplot only creates one plot, 
                     # you might be adding layers to an existing figure
         n_row = 1
         n_col = 1
@@ -279,16 +278,12 @@ def add_layer(data = None, x = None, y = None, layer = None, fig = None, row = N
 
     if ('name' not in kwargs.keys()) and isinstance(y, pd.Series):
         kwargs['name'] = y.name
-
-    if ('name' not in kwargs.keys()) and (not isinstance(y, pd.Series)): 
+    elif ('name' not in kwargs.keys()) and (not isinstance(y, pd.Series)): 
         # setting name to empty string if not prespecified
         kwargs['name'] = '' # avoids the names trace 1,2,3 etc
     
-    if 'secondary_y' in kwargs.keys(): # setting secondary_y argument to add_trace() if not prespecified
-        secondary_y = kwargs['secondary_y']
-        kwargs.pop('secondary_y')
-    else:
-        secondary_y = False
+    # setting secondary_y argument to add_trace(), default False if not in kwargs
+    secondary_y = kwargs.pop('secondary_y', False)
 
     # adding trace
     if mode[0] == 's': # to find scatter
@@ -311,7 +306,7 @@ def add_layer(data = None, x = None, y = None, layer = None, fig = None, row = N
         fig = fig.add_trace(go.Bar(x = x, y = y, **kwargs),
                             row = row, col = col, 
                             secondary_y = secondary_y)
-    elif mode[0] == 'h': # to find line
+    elif mode[0] == 'h': # to find histogram
         fig = fig.add_trace(go.Histogram(x = x, y = y, **kwargs),
                             row = row, col = col, 
                             secondary_y = secondary_y)
