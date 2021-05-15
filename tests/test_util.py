@@ -62,7 +62,7 @@ class TestAsList:
     def test_dict(self):
         # dict
         error_msg = 'obj should be a string or list-like, not a dict'
-        with pytest.raises(TypeError):
+        with pytest.raises(TypeError, match = error_msg):
             as_list({'one':1, 'two': 2, 'three': 3})
 
 
