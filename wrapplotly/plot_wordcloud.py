@@ -9,6 +9,16 @@ else:
     from wrapplotly.util import as_list
 
 def plot_wordcloud(wc, hovertextsize = 32, **kwargs):
+    '''
+    Plots a wordcloud object.
+    
+    Parameters
+    ----------
+    wc: wordcloud.wordcloud.WordCloud object
+    hovertextsize: int
+        Size of the hovertext
+    **kwargs: keyword arguments passed onto fig.update_layout()
+    '''
     width = wc.width
     height = wc.height
     font_family = as_list(PIL.ImageFont.truetype(wc.font_path).getname())[0]
@@ -86,7 +96,7 @@ def plot_wordcloud(wc, hovertextsize = 32, **kwargs):
 # vectorizer = CountVectorizer().fit([soup.get_text()])
 # counts = vectorizer.transform([soup.get_text()])
 
-# short_english_stopwords = [w for w in ENGLISH_STOP_WORDS if len(w) <= 3]
+# short_english_stopwords = [w for w in ENGLISH_STOP_WORDS if len(w) <= ]
 # digit_words = [w for w in vectorizer.get_feature_names() if re.match('^\d{1,3}$', w) is not None]
 # manually_added = ['edit','retrieved','from','with','identifierswikipedia','articles']
 

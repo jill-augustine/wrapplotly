@@ -44,17 +44,17 @@ def save_plot(plot, file, mode = 'static', **kwargs):
     ''' Save a plot into external file, based on selected mode: option "static" exports plot as .png file,
     option "interactive" exports plot as html file.
 
-        Parameters
-        ----------
-        plot: plotly.graph_objects.Figure
-        file: str of filepath including file extension
-        mode: str of 'interactive' or 'static'
-        kwargs: kwargs passed on to write_image() for static plots and 
-            to write_html() for interactive plots
+    Parameters
+    ----------
+    plot: plotly.graph_objects.Figure
+    file: str of filepath including file extension
+    mode: str of 'interactive' or 'static'
+    kwargs: kwargs passed on to write_image() for static plots and 
+        to write_html() for interactive plots
 
-        Returns
-        -------
-        None
+    Returns
+    -------
+    None
     '''
 
     if mode == 'static':

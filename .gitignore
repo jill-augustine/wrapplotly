@@ -1,3 +1,7 @@
+create_docs.sh
+doc/templates/*
+doc/**/*.html
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
