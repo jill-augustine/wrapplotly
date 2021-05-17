@@ -5,10 +5,10 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="wrapplotly",
-    version="0.0.2",
+    version="0.0.3",
     author="Jillian Augustine",
     author_email="jaugur.ds@gmail.com",
-    description="A plotly wrapper allowing subplots and single plots",
+    description="A plotly wrapper allowing subplots, single plots and word clouds",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/jill-augustine/wrapplotly",

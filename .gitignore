@@ -1,4 +1,8 @@
 create_docs.sh
+build_package.sh
+eg.html
+eg.png
+
 doc/templates/*
 doc/**/*.html
 
